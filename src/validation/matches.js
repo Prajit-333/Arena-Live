@@ -19,6 +19,7 @@ export const matchIdParamSchema=z.object({
 
 export const createMatchSchema = z.object({
     sport: z.string().min(1),
+    league: z.string().min(1),
     homeTeam: z.string().min(1),
     awayTeam: z.string().min(1), 
     startTime: z.coerce.date(),
