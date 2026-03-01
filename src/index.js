@@ -2,7 +2,8 @@ import express from "express";
 import {matchRouter} from './routes/matches.js';
 import 'dotenv/config'; 
 import http from 'http';
-import { attachWebSocketServer } from "../ws/server.js";
+import { attachWebSocketServer } from "../src/ws/server.js";
+import { securityMiddleware } from "./arcjet.js";
 
 const port=8000;
 const app = express();
@@ -13,6 +14,7 @@ const {broadcastMatchCreated}=attachWebSocketServer(server);
 app.locals.broadcastMatchCreated=broadcastMatchCreated;
 
 
+app.use(securityMiddleware);
 app.use(express.json());
 
 app.get('/',(req,res)=>{
